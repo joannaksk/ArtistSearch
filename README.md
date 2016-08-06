@@ -13,6 +13,7 @@ fragment to an activity dynamically, fragment replacement, recycler view use e.t
 This was just my practise but I hope t helps someone out there. :D
 
 Useful Links for Initial Commit:
+http://www.last.fm/api
 http://reactivex.io/documentation/observable.html
 https://guides.codepath.com/android/Consuming-APIs-with-Retrofit#rxjava
 http://www.node.mu/2014/07/02/using-retrofit-and-rxjava-to-interact-with-web-services-on-android/
