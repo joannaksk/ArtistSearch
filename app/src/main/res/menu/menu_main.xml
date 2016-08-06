@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ksaakstudio.joanna.artistsearch.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <!--I had to specify the class for the progress bar to show instead of it's menu item title-->
+    <item
+        android:title="@string/loading_text"
+        android:id="@+id/searchActionProgress"
+        android:visible="false"
+        app:showAsAction="always"
+        android:orderInCategory="99"
+        android:actionLayout="@layout/action_view_progress"
+        app:actionViewClass="android.widget.ProgressBar"/>
+</menu>

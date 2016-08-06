@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:gravity="center_vertical">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/artist_image_imageview"/>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="bold"
+            android:id="@+id/artist_name_textview"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="italic"
+            android:id="@+id/artist_listeners_textview"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/courtesy_of_last_fm"/>
+    </LinearLayout>
+
+</LinearLayout>

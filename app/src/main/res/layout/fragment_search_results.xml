@@ -1,0 +1,25 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.ksaakstudio.joanna.artistsearch.SearchResultsFragment">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_search_results" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_youtube_searched_for_white_48dp"
+        app:layout_anchor="@+id/list_search_results"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="com.ksaakstudio.joanna.artistsearch.behaviours.ScrollAwareFABBehaviour"/>
+
+</android.support.design.widget.CoordinatorLayout>
