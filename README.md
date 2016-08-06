@@ -13,3 +13,9 @@ fragment to an activity dynamically, fragment replacement, recycler view use e.t
 This was just my practise but I hope t helps someone out there. :D
 
 Useful Links:
+http://reactivex.io/documentation/observable.html
+https://guides.codepath.com/android/Consuming-APIs-with-Retrofit#rxjava
+http://www.node.mu/2014/07/02/using-retrofit-and-rxjava-to-interact-with-web-services-on-android/
+http://randomdotnext.com/retrofit-rxjava/
+http://blog.stablekernel.com/replace-asynctask-asynctaskloader-rx-observable-rxjava-android-patterns/
+https://kmangutov.wordpress.com/2015/03/28/android-mvp-consuming-restful-apis/
