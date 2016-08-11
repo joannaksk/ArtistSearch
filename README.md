@@ -31,6 +31,7 @@ did a little code optimisation as well.
 
 Useful Links for Second Major Commit:<br />
 http://reactivex.io/documentation/single.html<br />
+http://satyan.github.io/sugar/getting-started.html<br />
 https://developer.android.com/guide/topics/ui/menus.html<br />
 https://bignerdranch.github.io/recyclerview-multiselect/<br />
 https://www.bignerdranch.com/blog/recyclerview-part-2-choice-modes/<br />
