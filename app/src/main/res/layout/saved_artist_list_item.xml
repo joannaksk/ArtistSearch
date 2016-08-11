@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:minHeight="?attr/listPreferredItemHeight"
     android:gravity="center_vertical"
+    android:weightSum="5"
     android:baselineAligned="false">
 
     <FrameLayout
@@ -17,6 +18,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:id="@+id/artist_image_imageview"
+            android:src="@drawable/placeholderx64"
             tools:ignore="ContentDescription" />
     </FrameLayout>
     <LinearLayout
@@ -29,24 +31,21 @@
         android:paddingRight="16dp">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="56dp"
             android:textAppearance="?android:textAppearanceLarge"
             android:fontFamily="sans-serif-light"
             android:textStyle="bold"
+            android:gravity="center_vertical"
             android:id="@+id/artist_name_textview"/>
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:fontFamily="sans-serif-light"
-            android:textStyle="italic"
-            android:id="@+id/artist_match_textview"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
+            android:layout_height="24dp"
             android:textAppearance="?android:textAppearanceSmall"
             android:fontFamily="sans-serif-light"
-            android:text="@string/courtesy_of_last_fm"/>
+            android:text="@string/courtesy_of_last_fm"
+            android:paddingTop="2dp"
+            android:paddingBottom="6dp"/>
     </LinearLayout>
 
 </LinearLayout>

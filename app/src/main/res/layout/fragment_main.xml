@@ -21,15 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:textSize="@dimen/start_instructions_textSize"
-            android:text="@string/start_instructions"
-            android:id="@+id/textView" />
+            android:text="@string/start_instructions" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:textColor="@color/colorText"
             android:textSize="@dimen/artist_search_textSize"
             android:fontFamily="sans-serif-condensed"
-            android:id="@+id/artist_search" />
+            android:id="@+id/artist_search"
+            android:inputType="text"/>
 
     </LinearLayout>
 

@@ -15,14 +15,13 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <!--It' important for the Image to come firt otherwise the toolbar will be hidden-->
+            <!--It' important for the Image to come first otherwise the toolbar will be hidden-->
             <ImageView
                 android:id="@+id/artist_image_imageview"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
@@ -30,7 +29,8 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
-                android:minHeight="100dp"/>
+                android:minHeight="100dp"
+                tools:ignore="ContentDescription" />
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
 
     <include layout="@layout/content_similar_artists" />
 
-    <!--This neat little trck lets me show the progress bar on top of the fab-->
+    <!--This neat little trick lets me show the progress bar on top of the fab-->
     <RelativeLayout
         android:id="@+id/fab_loading"
         android:layout_width="wrap_content"
@@ -62,8 +62,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginLeft="24dp"
             android:layout_marginBottom="32dp"
-            android:layout_marginRight="24dp"
-            android:id="@+id/artist_search_progress"/>
+            android:layout_marginRight="24dp" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

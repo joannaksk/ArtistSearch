@@ -27,10 +27,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     private final OnItemClickListener listener;
 
     public class ArtistViewHolder extends RecyclerView.ViewHolder {
-        protected ImageView artist_image;
-        protected TextView artist_name;
-        protected TextView artist_listeners;
-        protected LinearLayout item;
+        final ImageView artist_image;
+        final TextView artist_name;
+        final TextView artist_listeners;
+        final LinearLayout item;
 
         public ArtistViewHolder(View itemView) {
             super(itemView);
@@ -62,7 +62,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         Uri image_uri = null;
 
         List<Image> images = artist.getImage();
-        if (images.size() != 0 && images.get(1).getText() != "") {
+        if (images.size() != 0 && !images.get(1).getText().equals("")) {
            image_uri  = Uri.parse(images.get(1).getText());
         }
 
@@ -77,6 +77,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         }
         
         holder.artist_name.setText(artist.getName());
+        holder.artist_image.setContentDescription(artist.getName());
 
         holder.artist_listeners.setText(String.format(mContext.getString(R.string.listeners_format),
                 artist.getListeners()));
@@ -100,6 +101,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     /**
      * Function that sets the artist List for this adapter
      * @param artists
+     * list of Artist images.
      */
     public void setArtistList(List<Artist> artists) {
         this.artistList = artists;

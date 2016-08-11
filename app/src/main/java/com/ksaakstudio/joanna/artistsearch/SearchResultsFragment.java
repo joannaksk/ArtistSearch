@@ -32,7 +32,7 @@ public class SearchResultsFragment extends Fragment {
     private static final String KEY_ARTISTS = "artists";
     private OnFragmentInteractionListener mListener;
     private List<Artist> mArtists;
-    public ArtistAdapter artistAdapter;
+    private ArtistAdapter artistAdapter;
 
     public SearchResultsFragment() {
         // Required empty public constructor
@@ -42,7 +42,7 @@ public class SearchResultsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param artists List of search results(artsts).
+     * @param artists List of search results(artists).
      *
      * @return A new instance of fragment SearchResultsFragment.
      */

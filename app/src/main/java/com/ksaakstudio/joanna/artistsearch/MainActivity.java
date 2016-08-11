@@ -1,15 +1,22 @@
 package com.ksaakstudio.joanna.artistsearch;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ksaakstudio.joanna.artistsearch.adapters.DrawerAdapter;
 import com.ksaakstudio.joanna.artistsearch.models.Artist;
 import com.ksaakstudio.joanna.artistsearch.models.Image;
 import com.ksaakstudio.joanna.artistsearch.services.ArtistSearchService;
@@ -34,6 +41,14 @@ public class  MainActivity extends AppCompatActivity implements SearchResultsFra
     private MenuItem searchActionProgressItem;
     private ProgressBar progressBar;
 
+    // Drawer related variables.
+    private String[] mActivitiesList;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
+    private ActionBarDrawerToggle mDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // We need to request this window feature so the progress bar will show.
@@ -42,6 +57,40 @@ public class  MainActivity extends AppCompatActivity implements SearchResultsFra
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Set up the rawer List View.
+        mActivitiesList = getResources().getStringArray(R.array.activity_names);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the drawer list view
+        mDrawerList.setAdapter(new DrawerAdapter(this,
+                mActivitiesList));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        //noinspection deprecation
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         // Instantiate a search fragment.
         searchFragment = new SearchFragment();
@@ -69,32 +118,55 @@ public class  MainActivity extends AppCompatActivity implements SearchResultsFra
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        // The action bar home/up action should open or close the drawer.
+        // ActionBarDrawerToggle will take care of this.
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        int id = item.getItemId();
 
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+
+    }
+
+    /**
+     * When using the ActionBarDrawerToggle, you must call it during
+     * onPostCreate() and onConfigurationChanged()...
+     */
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggle
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     /**
      * Function to show the progress bar.
      */
-    public void showProgressBar() {
+    private void showProgressBar() {
         searchActionProgressItem.setVisible(true);
     }
 
     /**
      * Function to hide the progress bar.
      */
-    public void hideProgressBar() {
+    private void hideProgressBar() {
         searchActionProgressItem.setVisible(false);
     }
 
     /**
      * Function that adds a subscription to the ArtistSearchService.
      * @param artist
+     * list of Artist images.
      */
     public void searchArtists(String artist) {
         showProgressBar();
@@ -180,5 +252,39 @@ public class  MainActivity extends AppCompatActivity implements SearchResultsFra
         intent.putExtra(SimilarArtistsActivity.ARTISTS_ID, artist);
         startActivity(intent);
 
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+
+    /** Swaps activities in the main content view */
+    private void selectItem(int position) {
+        Intent intent;
+        switch(position) {
+            case 0:
+                intent = new Intent(this, MainActivity.class);
+                break;
+            case 1:
+                intent = new Intent(this, SavedArtistsActivity.class);
+                break;
+            default :
+                intent = new Intent(this, MainActivity.class);
+                break;
+        }
+        startActivity(intent);
+        // Highlight the selected item, update the title, and close the drawer
+        mDrawerList.setItemChecked(position, true);
+        setTitle(mActivitiesList[position]);
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getSupportActionBar().setTitle(mTitle);
     }
 }

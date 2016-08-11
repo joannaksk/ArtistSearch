@@ -20,3 +20,17 @@ http://www.node.mu/2014/07/02/using-retrofit-and-rxjava-to-interact-with-web-ser
 http://randomdotnext.com/retrofit-rxjava/<br />
 http://blog.stablekernel.com/replace-asynctask-asynctaskloader-rx-observable-rxjava-android-patterns/<br />
 https://kmangutov.wordpress.com/2015/03/28/android-mvp-consuming-restful-apis/<br />
+
+The second commit shows how to use Sugar ORM to persist data to a database. It also shows how to use
+an Rx.Single instead of an Rx.Observable,  useful when you're observing a process that will emit
+only a single item. I also changed the Main Activity into a Drawer Activity.
+
+I implemented a new Saved Artists Activity (also a Drawer Activity). The Recycler view for the list
+of saved artists has Multi Choice support provided by the MultiSelector from Big Nerd Ranch.
+did a little code optimisation as well.
+
+Useful Links for Second Major Commit:<br />
+http://reactivex.io/documentation/single.html<br />
+https://developer.android.com/guide/topics/ui/menus.html<br />
+https://bignerdranch.github.io/recyclerview-multiselect/<br />
+https://www.bignerdranch.com/blog/recyclerview-part-2-choice-modes/<br />

@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -22,7 +24,7 @@ import javax.annotation.Generated;
  * objects returned by the similar artists url.
  */
 @Generated("org.jsonschema2pojo")
-public class Artist implements Parcelable {
+public class Artist extends SugarRecord implements Parcelable {
 
     @SerializedName("name")
     @Expose
@@ -44,8 +46,14 @@ public class Artist implements Parcelable {
     private String streamable;
     @SerializedName("image")
     @Expose
+    @Ignore
     private List<Image> image = new ArrayList<Image>();
+    @Ignore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    // This is a convenience field for storing a url to the artists medium image in the database.
+    // This way I don't have to store the whole Images List.
+    @Expose
+    private String imageMedium;
 
     // static field used to regenerte object individually or as arrays.
     public static final Parcelable.Creator<Artist> CREATOR = new Parcelable.Creator<Artist>() {
@@ -61,6 +69,9 @@ public class Artist implements Parcelable {
         }
     };
 
+    public Artist() {
+    }
+
     public Artist(String name, String listeners, String mbid,
                   String url, String streamable, List<Image> image,
                   Map<String, Object> additionalProperties) {
@@ -71,6 +82,8 @@ public class Artist implements Parcelable {
         this.streamable = streamable;
         this.image = image;
         this.additionalProperties = additionalProperties;
+        // After all the images are in, set the ImageMedium property.
+        this.setImageMedium(image);
     }
 
     public Artist(String name, String listeners, String mbid,
@@ -88,6 +101,8 @@ public class Artist implements Parcelable {
         streamable = parcel.readString();
         parcel.readTypedList(image, Image.CREATOR);
         additionalProperties = parcel.readHashMap(ClassLoader.getSystemClassLoader());
+        match = parcel.readString();
+        imageMedium = parcel.readString();
 
     }
 
@@ -265,6 +280,29 @@ public class Artist implements Parcelable {
         return this;
     }
 
+    /**
+     *
+     * @return
+     *     The string url for the medium sized image.
+     */
+    public String getImageMedium() {
+        return imageMedium;
+    }
+
+    /**
+     *
+     * @param image
+     *     The image
+     */
+    private void setImageMedium(List<Image> image) {
+        for(Image obj : image) {
+            if (obj.getSize().equals("medium")
+                    && !obj.getText().equals("")) {
+                this.imageMedium = obj.getText();
+            }
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -279,5 +317,7 @@ public class Artist implements Parcelable {
         dest.writeString(this.streamable);
         dest.writeTypedList(this.image);
         dest.writeMap(this.additionalProperties);
+        dest.writeString(this.match);
+        dest.writeString(this.imageMedium);
     }
 }

@@ -10,6 +10,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:listViewStyle">@style/TransparentListView</item>
         <item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
+        <!--Styling Action mode here.-->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@drawable/my_actionmode_background</item>
+        <item name="android:actionModeBackground">@drawable/my_actionmode_background</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -20,11 +24,6 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <!--<style name="AsBackground">-->
-    <!--<item name="android:background">@drawable/app_background</item>-->
-    <!--<item name="android:padding">0dp</item>-->
-    <!--</style>-->
 
     <style name="TransparentListView" parent="@android:style/Widget.ListView">
         <item name="android:cacheColorHint">@android:color/transparent</item>

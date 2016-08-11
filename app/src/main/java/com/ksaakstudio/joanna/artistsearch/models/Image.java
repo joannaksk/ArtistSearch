@@ -48,7 +48,7 @@ public class Image implements Parcelable{
         this.additionalProperties = additionalProperties;
     }
 
-    public Image(Parcel parcel) {
+    private Image(Parcel parcel) {
         this.text = parcel.readString();
         this.size = parcel.readString();
         this.additionalProperties = parcel.readHashMap(ClassLoader.getSystemClassLoader());

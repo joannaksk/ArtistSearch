@@ -1,11 +1,11 @@
 package com.ksaakstudio.joanna.artistsearch;
 
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,7 +64,7 @@ public class SimilarArtistsActivity extends AppCompatActivity {
         if(!artist.getImage().isEmpty()) {
             List<Image> images = artist.getImage();
             Image largeImage = images.get(3);
-            if (largeImage != null && largeImage.getText() != "") {
+            if (largeImage != null && !largeImage.getText().equals("")) {
                 Uri largeImageUri = Uri.parse(largeImage.getText());
                 Picasso.with(this).cancelRequest(artistImage);
                 if (largeImageUri != null) {
@@ -108,11 +108,8 @@ public class SimilarArtistsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 
 
@@ -155,6 +152,13 @@ public class SimilarArtistsActivity extends AppCompatActivity {
                             Log.d(LOG_TAG, "Couldn't call " + uri.toString() + ", no receiving apps installed!");
                         }
                     }
+                }
+            }, new SimilarArtistAdapter.OnItemLongClickListener() {
+                // On Long Click persist this artist to the database.
+                @Override
+                public void onItemLongClick(Artist artist) {
+                    artist.save();
+                    Toast.makeText(getActivity(), "Artist saved.", Toast.LENGTH_SHORT).show();
                 }
             });
             resultsView.setAdapter(similarArtistAdapter);
